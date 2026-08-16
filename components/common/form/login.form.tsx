@@ -4,13 +4,23 @@ import Input from "../ui/input";
 import Button from "../ui/button";
 import { useForm } from "react-hook-form";
 import { register } from "module";
+import * as yup from 'yup'
+import {yupResolver } from "@hookform/resolvers/yup";
+
+
+//* login Schema
+const loginSchema = yup.object({
+  email: yup.string().email('invalid email format').required('email is required'),
+  password: yup.string().required('password is required')
+})
 
 const LoginForm = () => {
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit , formState: {errors} } = useForm({
     defaultValues: {
       email: "",
       password: "",
     },
+    resolver: yupResolver(loginSchema)
   });
 
   const onSubmit = (data: { email: string; password: string }) => {
@@ -27,6 +37,7 @@ const LoginForm = () => {
         placeholder={"john@gmail.com"}
         type={"email"}
         register={register}
+        error={errors?.email?.message}
       />
 
       {/* password */}
@@ -37,6 +48,7 @@ const LoginForm = () => {
         placeholder={"enter password"}
         type={"password"}
         register={register}
+        error={errors?.password?.message}
       />
 
       {/* login button */}
