@@ -4,27 +4,33 @@ import Input from "../ui/input";
 import Button from "../ui/button";
 import { useForm } from "react-hook-form";
 import { register } from "module";
-import * as yup from 'yup'
-import {yupResolver } from "@hookform/resolvers/yup";
-
-
-//* login Schema
-const loginSchema = yup.object({
-  email: yup.string().email('invalid email format').required('email is required'),
-  password: yup.string().required('password is required')
-})
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { loginSchema } from "@/schema/auth.schema";
+import { TLogin } from "@/types/auth.types";
+import { Login } from "@/api/auth.api";
 
 const LoginForm = () => {
-  const { register, handleSubmit , formState: {errors} } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<TLogin>({
     defaultValues: {
       email: "",
       password: "",
     },
-    resolver: yupResolver(loginSchema)
+    resolver: yupResolver(loginSchema),
   });
 
-  const onSubmit = (data: { email: string; password: string }) => {
-    console.log("Login form submitted", data);
+  const onSubmit = async (data: TLogin) => {
+    try {
+      console.log("Login form submitted", data);
+      const response = await Login(data);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
