@@ -9,6 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "@/schema/auth.schema";
 import { TLogin } from "@/types/auth.types";
 import { Login } from "@/api/auth.api";
+import { useMutation } from "@tanstack/react-query";
 
 const LoginForm = () => {
   const {
@@ -23,14 +24,19 @@ const LoginForm = () => {
     resolver: yupResolver(loginSchema),
   });
 
+  // react query mutation
+  const { isPending, mutate } = useMutation({
+    mutationFn: Login,
+    onSuccess: (Response) => {
+      console.log("on login success", Response);
+    },
+    onError: (error) => {
+      console.log("on login error", error);
+    },
+  });
+
   const onSubmit = async (data: TLogin) => {
-    try {
-      console.log("Login form submitted", data);
-      const response = await Login(data);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
+    mutate(data);
   };
 
   return (

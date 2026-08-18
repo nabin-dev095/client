@@ -67,7 +67,7 @@ const SignUpForm = () => {
        <Input
         id={"confrom_password"}
         label={"Conform Password"}
-        name={"confrom_password"}
+        name={"conform_password"}
         placeholder={"retype your password"}
         type={"password"}
         register={register}
