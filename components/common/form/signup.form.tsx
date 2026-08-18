@@ -6,26 +6,23 @@ import { useForm } from "react-hook-form";
 import { register } from "module";
 import * as yup from 'yup'
 import {yupResolver } from "@hookform/resolvers/yup";
+import { registerSchema } from "@/schema/auth.schema";
+import { TRgister } from "@/types/auth.types";
 
 
-//* login Schema
-const loginSchema = yup.object({
-  email: yup.string().email('invalid email format').required('email is required'),
-  password: yup.string().required('password is required')
-})
 
 const SignUpForm = () => {
-  const { register, handleSubmit , formState: {errors} } = useForm({
+  const { register, handleSubmit , formState: {errors} } = useForm<TRgister>({
     defaultValues: {
       email: "",
       password: "",
       conform_password: "",
       full_name: "",
     },
-    resolver: yupResolver(loginSchema)
+    resolver: yupResolver(registerSchema)
   });
 
-  const onSubmit = (data: { email: string; password: string; full_name: string; conform_password: string}) => {
+  const onSubmit = (data: TRgister) => {
     console.log(" Sign Up form submitted", data);
   };
 
