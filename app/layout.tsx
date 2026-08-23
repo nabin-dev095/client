@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ReactQueryClientProvider from "@/provider/query-client.provider";
 import { Toaster } from "react-hot-toast";
+import NavBar from "@/components/client/layout/nav";
+import Footer from "@/components/client/layout/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

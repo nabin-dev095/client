@@ -5,7 +5,7 @@ const Logo = () => {
   return (
     <div className='max-h-14 max-w-14 overflow-clip rounded'>
             <Image
-                src={'/logo.jpg'}
+                src={'/logo.svg'}
                 alt='logo'
                 height={500}
                 width={500}
