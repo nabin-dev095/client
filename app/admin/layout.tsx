@@ -1,19 +1,19 @@
+import AdminHeader from "@/components/admin/layout/header";
+import Header from "@/components/admin/layout/header";
+import Sidebar from "@/components/admin/layout/sidebar";
 import React from "react";
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <main className="h-screen flex">
-      <aside className="h-full w-60 border-r border-gray-300">
-        <p>Side bar </p>
-      </aside>
+      {/* sidebar  */}
+      <Sidebar />
 
       <section className="w-full ">
         {/* header  */}
-      <header  className="h-14  border-b border-gray-300 shadow">
-        <p>Admin header</p>
-      </header>
+        <AdminHeader />
 
-      <section>{children}</section>
+        <section>{children}</section>
       </section>
     </main>
   );
