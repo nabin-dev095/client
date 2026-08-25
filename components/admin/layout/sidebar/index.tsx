@@ -16,7 +16,7 @@ const Links: {
     label: "Dashborad",
     id: "dashboard",
     route: "/admin",
-    icon: <RiDashboardLine size={22} /> ,
+    icon: <RiDashboardLine size={22} />,
   },
   {
     label: "Brands",
@@ -35,13 +35,13 @@ const Links: {
     label: "Products",
     id: "product",
     route: "/admin/products",
-    icon: <RiDashboardLine size={22}/>,
+    icon: <RiDashboardLine size={22} />,
   },
   {
     label: "Users",
     id: "users",
     route: "/admin/users",
-    icon: <FaUsers  size={22}/>,
+    icon: <FaUsers size={22} />,
   },
 ];
 
