@@ -22,7 +22,7 @@ const CategoryList = () => {
             {isLoading ? <div className='w-full flex justify-center items-center h-50'>
                 <p>Loading...</p>
             </div> : <div className='grid grid-cols-6 gap-10'>
-                {
+                {   
                     data?.data?.map((category: TCategory) => <CategoryCard key={category._id} category={category} />)
                 }
             </div>}
