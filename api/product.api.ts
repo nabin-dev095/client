@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import axios from "axios";
 import api from ".";
 
-export const getAllCategory = async () => {
+export const getAllProducts = async () => {
   try {
-    const response = await api.get("/categories");
+    const response = await api.get("/products");
     return response.data;
   } catch (error: any) {
     throw error?.response?.data;
