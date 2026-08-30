@@ -5,3 +5,11 @@ export type TCategory = {
   description: string;
   image: TImage;
 } & TResponseData;
+
+
+
+export type TBrand = {
+  name: string;
+  description: string;
+  logo: TImage;
+} & TResponseData;

@@ -4,6 +4,8 @@ import React from 'react'
 import CategoryCard from '../category-section/card'
 import { useQuery } from '@tanstack/react-query'
 import { getAllProducts } from '@/api/product.api'
+import { TProduct } from '@/types/product.types'
+import ProductCard from '../product-card'
 
 
 
@@ -22,7 +24,7 @@ const FeaturedProductsList = () => {
                 <p>Loading...</p>
             </div> : <div className='grid grid-cols-6 gap-10'>
                 {
-                    data?.data?.map((category: TCategory) => <CategoryCard key={category._id} category={category} />)
+                    data?.data?.map((product: TProduct) => <ProductCard key={product._id} product={product} />)
                 }
             </div>}
         </div>
