@@ -17,3 +17,19 @@ export const Login = async (data: TLogin) => {
         
     }
 }
+
+//* get profile
+export const getProfile = async () => {
+    try {
+        const response = await api.get(
+            "/auth/profile",
+            
+        );
+        return response.data;
+        
+    } catch (error: any) {
+        throw error?.response?.data;
+        
+    }
+}
+
