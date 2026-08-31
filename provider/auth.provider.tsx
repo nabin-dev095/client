@@ -13,6 +13,8 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         refetchInterval: 5 * 60 * 1000
     })
 
+    //
+
 
   return (
     <AuthContext.Provider

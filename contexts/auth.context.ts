@@ -3,7 +3,7 @@ import { Role, TImage, TResponseData } from "@/types/global.types";
 import { createContext } from "react";
 
 
-type TUser = {
+export type TUser = {
     full_name: string;
     email: string;
     profile_image: TImage;
