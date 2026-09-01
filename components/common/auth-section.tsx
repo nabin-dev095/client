@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { AuthContext, TUser } from "@/contexts/auth.context";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,12 +6,12 @@ import React, { useContext } from "react";
 
 const AuthSection = () => {
   //* using context
-  const { user, isLoading } = useContext(AuthContext);
+  const { user, isLoading, logout } = useContext(AuthContext);
   return (
     <div className="min-w-20">
       {isLoading && <p>Loading</p>}
 
-      {!isLoading && user && <UserProfile user={user} />}
+      {!isLoading && user && <UserProfile user={user} logout={logout} />}
 
       {!isLoading && !user && <AuthButton />}
     </div>
@@ -19,14 +19,14 @@ const AuthSection = () => {
 };
 
 const UserProfile = ({
-  user: { full_name, profile_image },
+  user: { full_name, profile_image }, logout
 }: {
-  user: TUser;
+  user: TUser, logout: () => void;
 }) => {
   return (
     <div className="flex items-center gap-1">
       {/* image */}
-      <div>
+      <div className="h-14 w-14 p-0.5 border border-primary rounded-full overflow-clip">
         <Image
           src={profile_image?.path}
           alt="profile image"
@@ -37,10 +37,10 @@ const UserProfile = ({
       </div>
       <div>
         {/* name  */}
-        <p className="font-bold text-lg">{full_name} </p>
+        <p className="font-bold text-primary text-lg">{full_name} </p>
 
         {/* logout  */}
-        <button className="cursor-pointer text-md font-semibold text-red-500">
+        <button onClick={logout} className="cursor-pointer text-md font-semibold text-red-500">
           Logout
         </button>
       </div>

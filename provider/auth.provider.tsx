@@ -1,28 +1,45 @@
-import { getProfile } from "@/api/auth.api";
+import { getProfile, logoutUser } from "@/api/auth.api";
 import { AuthContext } from "@/contexts/auth.context";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React from "react";
+import toast from "react-hot-toast";
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
-    const { data, isLoading} = useQuery ({
-        queryFn: getProfile,
-        queryKey: ['auth-profile'],
-        retry: false,
-        refetchOnWindowFocus: 'always',
-        refetchInterval: 5 * 60 * 1000
-    })
+  const queryClient = useQueryClient()
 
-    //
+
+  const { data, isLoading } = useQuery({
+    queryFn: getProfile,
+    queryKey: ["auth-profile"],
+    retry: false,
+    refetchOnWindowFocus: "always",
+    refetchInterval: 5 * 60 * 1000,
+  });
+
+  //*logout mutution
+  const {mutate: logoutMutation, isPending:logoutPending} = useMutation({
+    mutationFn: logoutUser,
+    onError: (error) => {
+      toast.error(error?.message ?? 'something went wrong')
+      queryClient.setQueryData(['auth-profile'], null)
+      queryClient.invalidateQueries({
+        queryKey: ['auth-profile']
+      })
+    },
+     onSuccess: (response) => {
+      toast.success(response?.message ?? 'Logout success!!')
+    }
+  })
 
 
   return (
     <AuthContext.Provider
       value={{
         user: null,
-        isLoading: false,
+        isLoading: isLoading || logoutPending,
         login: () => {},
-        logout: () => {},
+        logout: logoutMutation,
         register: () => {},
       }}
     >

@@ -15,6 +15,8 @@ import { useRouter } from "next/navigation";
 import { all_admins } from "@/types/global.types";
 
 const LoginForm = () => {
+  const queryClient = useQueryClient()
+
 const router = useRouter()
   const {
     register,
@@ -34,6 +36,9 @@ const router = useRouter()
     onSuccess: (response) => {
       console.log("on login success", response);
       toast.success(response.message?? 'Login Success')
+      queryClient.invalidateQueries({
+        queryKey:['auth-profile']
+      })
       if(all_admins.includes(response.data.user.role)){
         router.replace('/admin')
       }else {

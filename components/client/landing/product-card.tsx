@@ -14,13 +14,13 @@ const ProductCard = ({
   product: { _id, name, cover_image, description, price, category, brand },
 }: IProps) => {
   return (
-    <div className="relative min-w-75 max-w-80 border border-gray-300 rounded-md group overflow-clip">
+    <div className="relative min-w-75 max-w-80 border border-gray-300 rounded-md group overflow-clip ">
       <button className="absolute top-2 right-2 z-10 cursor-pointer border border-primary  h-10 aspect-square rounded-full flex justify-center items-center p-1 bg-primary/10 ">
         <FaRegHeart className="text-primary" size={20} />
       </button>
 
       {/* image */}
-      <div className="w-full h-50 rounded-t-md overflow-clip">
+      <div className="w-full h-50 rounded-t-md overflow-clip ">
         <Image
           src={cover_image?.path}
           alt={name + "-" + "image"}
