@@ -5,9 +5,7 @@ import React from "react";
 import toast from "react-hot-toast";
 
 const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-
-  const queryClient = useQueryClient()
-
+  const queryClient = useQueryClient();
 
   const { data, isLoading } = useQuery({
     queryFn: getProfile,
@@ -18,25 +16,24 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   });
 
   //*logout mutution
-  const {mutate: logoutMutation, isPending:logoutPending} = useMutation({
+  const { mutate: logoutMutation, isPending: logoutPending } = useMutation({
     mutationFn: logoutUser,
     onError: (error) => {
-      toast.error(error?.message ?? 'something went wrong')
-      queryClient.setQueryData(['auth-profile'], null)
-      queryClient.invalidateQueries({
-        queryKey: ['auth-profile']
-      })
+      toast.error(error?.message ?? "something went wrong");
     },
-     onSuccess: (response) => {
-      toast.success(response?.message ?? 'Logout success!!')
-    }
-  })
-
+    onSuccess: (response) => {
+      toast.success(response?.message ?? "Logout success!!");
+      queryClient.setQueryData(["auth-profile"], null);
+      queryClient.invalidateQueries({
+        queryKey: ["auth-profile"],
+      });
+    },
+  });
 
   return (
     <AuthContext.Provider
       value={{
-        user: null,
+        user: data?.data,
         isLoading: isLoading || logoutPending,
         login: () => {},
         logout: logoutMutation,

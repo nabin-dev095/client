@@ -1,3 +1,4 @@
+'use client'
 import React, { Children } from "react";
 import ReactQueryClientProvider from "./query-client.provider";
 import AuthProvider from "./auth.provider";
