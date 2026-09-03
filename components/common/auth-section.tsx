@@ -21,45 +21,54 @@ const AuthSection = () => {
   );
 };
 
-const UserProfile = ({ user: { full_name, profile_image, role }, logout }: { user: TUser, logout: () => void }) => {
-    return (
-        <div className="flex items-center gap-5 ">
-            {/*icons */}
-            {role !== Role.ADMIN &&
-                <div className="flex gap-2">
-                    <Link href={'/wishlist'}>
-                        <IoMdHeart size={28} className="text-red-500 mt-0.5" />
-                    </Link>
-                    <Link href={'/cart'}>
-                        <HiShoppingBag size={26} className="text-primary" />
-                    </Link>
-                </div>
-            }
-
-            {/*user profile */}
-            <div className="flex items-center gap-1">
-                {/* image */}
-                <div className="h-14 w-14 p-0.5 border border-primary rounded-full overflow-clip">
-                    <Image
-                        src={profile_image?.path ?? '/profile.jpg'}
-                        alt="profile image"
-                        height={500}
-                        width={500}
-                        className="h-full w-full rounded-full"
-                    />
-                </div>
-                <div>
-                    {/* name  */}
-                    <p className="font-bold text-primary text-lg">{full_name}</p>
-                    {/* logout */}
-                    <button onClick={logout} className="cursor-pointer text-md font-semibold text-red-500">Logout</button>
-                </div>
-            </div>
+const UserProfile = ({
+  user: { full_name, profile_image, role },
+  logout,
+}: {
+  user: TUser;
+  logout: () => void;
+}) => {
+  return (
+    <div className="flex items-center gap-5 ">
+      {/*icons */}
+      {role !== Role.ADMIN && (
+        <div className="flex gap-2">
+          <Link href={"/wishlist"}>
+            <IoMdHeart size={28} className="text-red-500 mt-0.5" />
+          </Link>
+          <Link href={"/cart"}>
+            <HiShoppingBag size={26} className="text-primary" />
+          </Link>
         </div>
+      )}
 
-    );
+      {/*user profile */}
+      <div className="flex items-center gap-1">
+        {/* image */}
+        <div className="h-14 w-14 p-0.5 border border-primary rounded-full overflow-clip">
+          <Image
+            src={profile_image?.path ?? "/profile.jpg"}
+            alt="profile image"
+            height={500}
+            width={500}
+            className="h-full w-full rounded-full"
+          />
+        </div>
+        <div>
+          {/* name  */}
+          <p className="font-bold text-primary text-lg">{full_name}</p>
+          {/* logout */}
+          <button
+            onClick={logout}
+            className="cursor-pointer text-md font-semibold text-red-500"
+          >
+            Logout
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 };
-
 
 const AuthButton = () => {
   return (

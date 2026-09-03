@@ -1,4 +1,7 @@
-import React from 'react'
+'use client'
+import withAuth from "@/hoc/withAuth.hoc";
+import { Role } from "@/types/global.types";
+import React from "react";
 
 const CartPage = () => {
   return (
@@ -7,16 +10,13 @@ const CartPage = () => {
       <header className="flex justify-between items-center">
         <div className="flex flex-col ">
           <h3 className="text-lg font-bold text-gray-700">Cart</h3>
-          <p className="text-sm text-gray-500 -mt-1">-
-          </p>
+          <p className="text-sm text-gray-500 -mt-1">-</p>
         </div>
       </header>
       {/* wishlist */}
     </main>
+  );
+};
 
-    
-    
-  )
-}
-
-export default CartPage
+const ProtectedCart = withAuth(CartPage, [Role.USER]);
+export default ProtectedCart;

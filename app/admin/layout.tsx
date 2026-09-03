@@ -1,6 +1,9 @@
+"use client";
 import AdminHeader from "@/components/admin/layout/header";
 import Header from "@/components/admin/layout/header";
 import Sidebar from "@/components/admin/layout/sidebar";
+import withAuth from "@/hoc/withAuth.hoc";
+import { Role } from "@/types/global.types";
 import React from "react";
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
@@ -19,4 +22,5 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default AdminLayout;
+const ProtectedAdminLayout = withAuth(AdminLayout, [Role.ADMIN]);
+export default ProtectedAdminLayout;

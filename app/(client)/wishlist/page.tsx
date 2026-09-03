@@ -1,3 +1,6 @@
+'use client'
+import withAuth from "@/hoc/withAuth.hoc";
+import { Role } from "@/types/global.types";
 import React from "react";
 
 const WishlistPage = () => {
@@ -16,4 +19,5 @@ const WishlistPage = () => {
   );
 };
 
-export default WishlistPage;
+const ProtectedWishlistPage = withAuth(WishlistPage, [Role.USER])
+export default ProtectedWishlistPage
